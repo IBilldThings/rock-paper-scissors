@@ -1,3 +1,6 @@
+let humanScore = 0;
+let computerScore = 0;
+
 function getComputerChoice() {
     let compChosen = ""
     const randomValue = Math.random()
@@ -15,9 +18,44 @@ function getComputerChoice() {
 
 function getHumanChoice(){
     userInput = window.prompt("What is your choice?");
-    playerChoice = String(userInput).toLowerCase();
+    let playerChoice = String(userInput).toLowerCase();
     return playerChoice
 }
 
-console.log(getComputerChoice());
-console.log(getHumanChoice());
+
+function playRound(humanChoice, computerChoice){
+
+    let result = "";
+
+    switch (`${humanChoice}-${computerChoice}`) {
+        case "rock-scissors":
+        case "paper-rock":
+        case "scissors-paper":
+            result = "Human wins!";
+            humanScore++;
+            break;
+
+        case "scissors-rock":
+        case "rock-paper":
+        case "paper-scissors":
+            result = "Computer wins!";
+            computerScore++;
+            break;
+
+        default:
+            result = "Tie!";
+    }
+
+    return result
+}
+
+function playGame(){
+    for (i = 0; i < 6; i++) {
+        let humanChoice = getHumanChoice();
+        let computerChoice = getComputerChoice();
+        console.log(playRound(humanChoice, computerChoice));
+    }
+}
+
+playGame();
+console.log("human: " + humanScore, "comp: " + computerScore);
